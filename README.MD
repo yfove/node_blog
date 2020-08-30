@@ -24,9 +24,19 @@ npm i --save-dev dotenv
 _check if we are running in production environment_
 
     if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config();
+    require("dotenv").parse();
     }
+
+    ^^^ this will not work
 
     if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
     }
+
+    ^^^ this will work
+
+_configure heroku_
+create a databse for mongo db on mongo db atlas.
+
+- free aws cluster
+- keep everything default
