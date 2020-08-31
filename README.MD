@@ -75,3 +75,8 @@ _Now we can create the views for the routes_
 - create new file called new.ejs
 
 Each one of our routes should be in their own folder. Routes or controllers will have a single file. Views will have a single folder for the files associated with the controller.
+
+#create a model
+
+- create models folder
+- create js file using singular of routes ie. /routes/authors => /models/author.js
