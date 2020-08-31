@@ -40,3 +40,38 @@ create a databse for mongo db on mongo db atlas.
 
 - free aws cluster
 - keep everything default
+
+_Creating New Routes_
+create authors.js
+
+// All authors route create
+
+```
+router.get('/', (req, res) => {
+    res.render('authors/index')
+})
+
+```
+
+// New authors route create
+
+```router.get('/new', (req. res) => {
+    res.render(authors/new)
+})
+```
+
+// Create Author
+
+```
+router.post('/', (req, res) => {
+    res.send('Create')
+})
+```
+
+_Now we can create the views for the routes_
+
+- create an authors folder
+- create new file called index.ejs
+- create new file called new.ejs
+
+Each one of our routes should be in their own folder. Routes or controllers will have a single file. Views will have a single folder for the files associated with the controller.
