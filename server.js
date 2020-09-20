@@ -8,7 +8,27 @@ app.set("view engine", "ejs");
 app.use("/articles", articleRouter);
 
 app.get("/", (req, res) => {
-  res.render("index");
+  // making some fake articles
+  const articles = [
+    {
+      title: "test article",
+      createdAt: new Date(),
+      description: "Test description",
+    },
+    {
+      title: "test article",
+      createdAt: new Date(),
+      description: "Test description2",
+    },
+    {
+      title: "test article",
+      createdAt: new Date(),
+      description: "Test descriptio3",
+    },
+  ];
+
+  // pass object into our index
+  res.render("index", { articles: articles });
 });
 
 app.listen(3000);
