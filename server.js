@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const Article = require("./models/article");
 const articleRouter = require("./routes/articles");
 const app = express();
 
@@ -9,32 +10,17 @@ mongoose.connect("mongodb://localhost/blog", {
 });
 
 app.set("view engine", "ejs");
+// we can access all the parameters from article form from the route
+app.use(express.urlencoded({ extended: false }));
 
-// use our routers
-app.use("/articles", articleRouter);
-
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   // making some fake articles
-  const articles = [
-    {
-      title: "test article",
-      createdAt: new Date(),
-      description: "Test description",
-    },
-    {
-      title: "test article",
-      createdAt: new Date(),
-      description: "Test description2",
-    },
-    {
-      title: "test article",
-      createdAt: new Date(),
-      description: "Test descriptio3",
-    },
-  ];
+  const articles = await Article.find();
 
   // pass object into our index
   res.render("articles/index", { articles: articles });
 });
+// use our routers, this has to be below encoder
+app.use("/articles", articleRouter);
 
 app.listen(3000);

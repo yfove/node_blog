@@ -1,4 +1,4 @@
-#guide
+# guide
 
 _setup_
 
@@ -76,7 +76,25 @@ _Now we can create the views for the routes_
 
 Each one of our routes should be in their own folder. Routes or controllers will have a single file. Views will have a single folder for the files associated with the controller.
 
-#create a model
+## create a model
+
+=================
 
 - create models folder
 - create js file using singular of routes ie. /routes/authors => /models/author.js
+- in models you can use:
+
+```
+app.use(express.urlencoded({extended: false}))
+```
+
+- allowing us to access all parameters from our form inside our routes
+- \*\*\* this needs to be ontop of app.use('articles', articleRouter)
+
+```
+router.post('/', (req, res) => {
+    const article = new Article({
+        req.body.markdown
+    })
+})
+```
