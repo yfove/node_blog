@@ -32,9 +32,10 @@ router.post("/", async (req, res) => {
 });
 
 // we meed use a library called method override to delete
+// in THML forms only GET and POST are allowed so we have to use middleware
 // allows use to override the method use DELETE or PATCH
 router.delete("/:id", async (req, res) => {
-  await Article.findByAndDelete(req.params.id);
+  await Article.findByIdAndDelete(req.params.id);
   res.redirect("/");
 });
 
