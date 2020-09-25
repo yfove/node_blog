@@ -14,7 +14,7 @@ router.get("/:slug", async (req, res) => {
   res.render(`articles/show`, { article: article });
 });
 
-// this is going to bae an asynch function so we need to set it up as so
+// this is going to be an async function so we need to set it up as so
 
 router.post("/", async (req, res) => {
   let article = new Article({
@@ -29,6 +29,13 @@ router.post("/", async (req, res) => {
     console.log(e);
     res.render("articles/new", { article: article });
   }
+});
+
+// we meed use a library called method override to delete
+// allows use to override the method use DELETE or PATCH
+router.delete("/:id", async (req, res) => {
+  await Article.findByAndDelete(req.params.id);
+  res.redirect("/");
 });
 
 module.exports = router;
