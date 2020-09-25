@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/", async (req, res) => {
   // making some fake articles
-  const articles = await Article.find();
+  const articles = await Article.find().sort({ createdAt: "desc" });
 
   // pass object into our index
   res.render("articles/index", { articles: articles });
