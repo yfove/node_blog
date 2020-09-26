@@ -13,7 +13,6 @@ router.get("/edit/:id", async (req, res) => {
 });
 
 router.get("/:slug", async (req, res) => {
-  console.log(req.params.id); // log the params id
   const article = await Article.findOne({ slug: req.params.slug });
   if (article == null) res.redirect("/");
   res.render('articles/show', { article: article });
@@ -24,15 +23,12 @@ router.get("/:slug", async (req, res) => {
 router.post("/", async (req, res, next) => {
   req.article = new Article();
   next();
-},
-  saveArticleAndRedirect("new"));
+}, saveArticleAndRedirect("new"));
 
 router.put("/:id", async (req, res, next) => {
   req.article = await Article.findById(req.params.id);
   next();
-},
-  saveArticleAndRedirect("edit")
-);
+}, saveArticleAndRedirect("edit"))
 
 // we meed use a library called method override to delete
 // in THML forms only GET and POST are allowed so we have to use middleware
@@ -40,7 +36,7 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res) => {
   await Article.findByIdAndDelete(req.params.id);
   res.redirect("/");
-});
+})
 
 function saveArticleAndRedirect(path) {
   return async (req, res) => {
@@ -53,7 +49,7 @@ function saveArticleAndRedirect(path) {
       res.redirect(`/articles/${article.slug}`);
     } catch (e) {
       console.log(e);
-      res.render(`articles/#{path}`, { article: article });
+      res.render(`articles/${path}`, { article: article });
     }
   }
 }
